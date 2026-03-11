@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서봉성 | 웹 개발자</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --ink: #111;
+    --ink-mid: #3a3a3a;
+    --ink-light: #666;
+    --ink-muted: #999;
+    --rule: #e0e0e0;
+    --bg: #fff;
+    --font: 'Pretendard', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 18px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 52px 120px;
+  }
+
+  @media (max-width: 660px) {
+    .page { padding: 48px 24px 80px; }
+  }
+
+  /* ─── HEADER ─────────────────────────────── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    padding-bottom: 36px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 60px;
+    animation: fadeUp 0.55s ease both;
+  }
+
+  .name {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    padding-bottom: 3px;
+    flex-shrink: 0;
+  }
+
+  .contact-item {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .contact-item:hover { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .header-right { align-items: flex-start; }
+  }
+
+  /* ─── SUMMARY ───────────────────────────── */
+  .summary {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.9;
+    margin-bottom: 64px;
+    animation: fadeUp 0.55s 0.07s ease both;
+  }
+
+  /* ─── SECTION WRAPPER ───────────────────── */
+  section {
+    margin-bottom: 64px;
+    animation: fadeUp 0.55s ease both;
+  }
+  section:nth-child(3) { animation-delay: 0.08s; }
+  section:nth-child(4) { animation-delay: 0.13s; }
+  section:nth-child(5) { animation-delay: 0.18s; }
+  section:nth-child(6) { animation-delay: 0.22s; }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 36px;
+  }
+
+  /* ─── TWO-COLUMN EXPERIENCE ─────────────── */
+  /* Each company: left col = meta, right col = projects */
+  .exp-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 80px;
+    margin-bottom: 52px;
+  }
+
+  .exp-row:last-child { margin-bottom: 0; }
+
+  /* left column */
+  .exp-meta {
+    padding-top: 2px;
+  }
+
+  .exp-company {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .exp-period {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+
+  .exp-role {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-light);
+  }
+
+  /* right column */
+  .exp-projects {}
+
+  .project {
+    margin-bottom: 36px;
+  }
+
+  .project:last-child { margin-bottom: 0; }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .project-name {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .project-period {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .project-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  .project-list li {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.75;
+  }
+
+  .project-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .tech {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  /* divider between projects */
+  .project + .project {
+    padding-top: 28px;
+    border-top: 1px dashed var(--rule);
+  }
+
+  /* mobile: stack columns */
+  @media (max-width: 640px) {
+    .exp-row { grid-template-columns: 1fr; gap: 16px 0; }
+    .exp-meta { padding-bottom: 4px; border-bottom: 1px solid var(--rule); }
+  }
+
+  /* ─── SKILLS ─────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    row-gap: 14px;
+    column-gap: 32px;
+    align-items: baseline;
+  }
+
+  .skill-cat {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-light);
+  }
+
+  .skill-val {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; row-gap: 4px; }
+    .skill-cat { margin-top: 12px; }
+  }
+
+  /* ─── EDUCATION / CERT ──────────────────── */
+  .edu-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 48px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .edu-row:first-child { padding-top: 0; }
+  .edu-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .edu-date {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    padding-top: 2px;
+  }
+
+  .edu-title {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .edu-sub {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-light);
+  }
+
+  @media (max-width: 560px) {
+    .edu-row { grid-template-columns: 1fr; gap: 2px 0; }
+  }
+
+  /* ─── LANGUAGES ─────────────────────────── */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 48px;
+  }
+
+  .lang-name {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .lang-detail {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+
+  footer a {
+    color: var(--ink-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ─── ANIMATION ─────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media print {
+    .page { padding: 32px 40px; }
+    * { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="header-left">
+      <div class="name">서봉성</div>
+      <div class="title">Web Developer</div>
+    </div>
+    <div class="header-right">
+      <a class="contact-item" href="/cdn-cgi/l/email-protection#335e4a464152020100735d524556411d505c5e">Email. <span class="__cf_email__" data-cfemail="05687c707764343736456b647360772b666a68">[email&#160;protected]</span></a>
+      <a class="contact-item" href="tel:+821099247948">Phone. +82 10-9924-7948</a>
+      <a class="contact-item" href="https://github.com/sbs524" target="_blank">GitHub. github.com/sbs524</a>
+      <a class="contact-item" href="https://gagega.tistory.com/" target="_blank">Blog. gagega.tistory.com</a>
+    </div>
+  </header>
+
+  <!-- ── SUMMARY ── -->
+  <p class="summary">
+    레거시 구조와 성능 병목을 개선하며 서비스의 안정성과 운영 효율을 높여온 웹 개발자입니다.<br>
+    SQL 튜닝과 CI/CD 자동화를 통해 조회 속도 최대 <strong>95%</strong>, 배포 시간 <strong>80%</strong>를 개선한 경험을 보유하고 있습니다.
+  </p>
+
+  <!-- ── EXPERIENCE ── -->
+  <section>
+    <div class="section-title">Experience</div>
+
+    <div class="exp-row">
+      <!-- LEFT: 회사 정보 -->
+      <div class="exp-meta">
+        <div class="exp-company">이노포스트</div>
+        <div class="exp-period">2024.01 — 재직 중</div>
+        <div class="exp-role">정규직 · 웹 개발자 연구원</div>
+      </div>
+
+      <!-- RIGHT: 프로젝트 상세 -->
+      <div class="exp-projects">
+
+        <div class="project">
+          <div class="project-header">
+            <span class="project-name">데이터관리포털 고도화</span>
+            <span class="project-period">2025.07 — 2025.11</span>
+          </div>
+          <ul class="project-list">
+            <li>메타데이터 표준화·품질 관리 기능과 대시보드·알림·이력관리 등 주요 고도화 기능 개발</li>
+            <li>트리 데이터에 레이지 로딩 기법을 적용해 조회 속도 <strong>90% 개선</strong></li>
+            <li>기존 SQL 서브쿼리를 함수화하여 <strong>95% 속도 개선</strong></li>
+            <li>다중 조인 레거시 SQL을 배치 테이블로 전환하여 조회 속도 <strong>약 90% 개선</strong></li>
+            <li>개발 화면 관련 내용 보고 및 고객 응대</li>
+          </ul>
+          <div class="tech">Spring · Ext.js 4 · JSP · Oracle PL/SQL · SVN · Agile</div>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <span class="project-name">의료데이터 유통플랫폼 클라우드 구축</span>
+            <span class="project-period">2024.01 — 2024.12</span>
+          </div>
+          <ul class="project-list">
+            <li>클라우드 환경에서 AI 분석 환경을 제공하는 웹사이트 및 RESTful API 개발</li>
+            <li>Jenkins Docker 이미지 생성·배포 파이프라인 구축으로 배포 시간 <strong>80% 감소</strong>, 팀 전원 배포 가능화</li>
+            <li>NICE 본인인증 · 다날 결제 서비스 API 연동</li>
+            <li>NHN 클라우드 환경에서 Jenkins · Docker · Kubernetes 활용 서비스 배포</li>
+            <li>데이터 분석 서비스 신청, 구독 결제, 관리자 승인 기반 로직 구현</li>
+          </ul>
+          <div class="tech">Spring · JSP · CUBRID · MyBatis · Git · Docker · Kubernetes</div>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <span class="project-name">빅데이터 오픈랩 구축</span>
+            <span class="project-period">2024.09 — 2024.12</span>
+          </div>
+          <ul class="project-list">
+            <li>데이터 분석 서비스 신청이 가능한 웹사이트 개발</li>
+            <li>데이터 분석 서비스 신청·처리 로직을 담당하는 서버사이드 개발</li>
+            <li>온프레미스 환경에서 서비스 배포</li>
+          </ul>
+          <div class="tech">Spring · JSP · Oracle · MyBatis · Git</div>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <span class="project-name">사내 개발서버 배포 자동화 및 문서화</span>
+          </div>
+          <ul class="project-list">
+            <li>CI/CD 파이프라인 구축으로 배포 소요 시간 <strong>80% 단축</strong> 및 배포 오류 감소</li>
+            <li>Nginx Proxy Manager 적용으로 도메인 관리 일원화, 접근성 개선</li>
+            <li>사업 정보 및 서버 환경을 문서화해 Slack 페이지로 정리, 협업 효율 향상</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section>
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <span class="skill-cat">Backend</span>
+      <span class="skill-val">Spring Framework, JSP, Tomcat, RESTful API, MyBatis</span>
+
+      <span class="skill-cat">Database</span>
+      <span class="skill-val">Oracle PL/SQL, CUBRID, SQL 튜닝, 배치 테이블 최적화</span>
+
+      <span class="skill-cat">DevOps</span>
+      <span class="skill-val">Docker, Kubernetes, Jenkins, Nginx Proxy Manager, NHN Cloud</span>
+
+      <span class="skill-cat">Frontend</span>
+      <span class="skill-val">Ext.js 4, JSP</span>
+
+      <span class="skill-cat">Tools</span>
+      <span class="skill-val">Git, SVN, Slack, Agile 방법론</span>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION & CERT ── -->
+  <section>
+    <div class="section-title">Education &amp; Certifications</div>
+
+    <div class="edu-row">
+      <div class="edu-date">2018.03 — 2024.02</div>
+      <div>
+        <div class="edu-title">공주대학교</div>
+        <div class="edu-sub">소프트웨어전공 학사 졸업</div>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-date">2023.07</div>
+      <div>
+        <div class="edu-title">정보처리기사</div>
+        <div class="edu-sub">한국산업인력공단</div>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-date">2024.09</div>
+      <div>
+        <div class="edu-title">SQLD</div>
+        <div class="edu-sub">SQL 개발자</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LANGUAGES ── -->
+  <section>
+    <div class="section-title">Languages</div>
+    <div class="lang-grid">
+      <div>
+        <div class="lang-name">영어</div>
+        <div class="lang-detail">일상 회화 · OPIc IM2 (2023.08)</div>
+      </div>
+      <div>
+        <div class="lang-name">일본어</div>
+        <div class="lang-detail">일상 회화 · JLPT N1 (2025.08)</div>
+      </div>
+   
